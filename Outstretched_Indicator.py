@@ -1,41 +1,21 @@
-from Objects.API_BBG import API_BBG
-from Objects.SQL_Server_Connection import SQL_Server_Connection
-
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 
+import yfinance as yf
+
 from datetime import date
 
-API_BBG = API_BBG()
-PM_Connection = SQL_Server_Connection(database='PM')
-
 # Variáveis/Objetos locais
-query = f"""
-SELECT 
-	Date
-    ,RiskFactor.Name
-	,Value 
-FROM 
-	IndexesValue 
-LEFT JOIN RiskFactor ON RiskFactor.Id=IndexesValue.Id_RiskFactor
-WHERE 
-	Id_RiskFactor IN (734, 735, 89)
-    AND Date>='20180101'
-    AND Date NOT IN ('20180115', '20180219', '20180309', '20181005', '20181123', '20181231', '20190822', '20180627', '20180706', '20180716')
-ORDER BY
-	Date"""
+Today = date.today()
 
-PM_Connection = SQL_Server_Connection(database='PM')
-Raw_Index = PM_Connection.getData(query=query, dtparse=['Date'])
-
-Pivot_Data = Raw_Index.pivot_table(values=['Value'], columns=['Name'], index=['Date'])
-
+Price_Data = yf.download("SPY ^BVSP", start="2001-01-01", end=Today.strftime("%Y-%m-%d"))
+Close_Price = Price_Data['Close']
 
 # Function to genererate outstrech values
 def Outstretched_Indicator(df, name_col, momentum_lookback=3, avg_lookback=3, n_points_chart=False, return_df=False):
     # DataFrame Manipular
-    Raw_DF = pd.DataFrame(df['Value'][name_col]).dropna()
+    Raw_DF = pd.DataFrame(df[name_col]).dropna()
 
     Raw_DF[f'{momentum_lookback}D_Change'] = (Raw_DF - Raw_DF.shift(momentum_lookback))
     Raw_DF[f'{momentum_lookback}D_Change_Side'] = np.where(Raw_DF[f'{momentum_lookback}D_Change']>0, 1, -1)
@@ -84,12 +64,5 @@ def Outstretched_Indicator(df, name_col, momentum_lookback=3, avg_lookback=3, n_
     if return_df:
         return Raw_DF
 
-SP_Outstretch = Outstretched_Indicator(df=Pivot_Data, name_col='S&P500', momentum_lookback=3, avg_lookback=3, return_df=True)
-Bonds_Px = Outstretched_Indicator(df=Pivot_Data, name_col='Octante LATAM Bonds Price Index', momentum_lookback=3, avg_lookback=3, n_points_chart=-252, return_df=True)
-Bonds_Z_Spread = Outstretched_Indicator(df=Pivot_Data, name_col='Octante LATAM Bonds Z-Spread Index', momentum_lookback=3, avg_lookback=3, n_points_chart=-252, return_df=True)
-
-Outstretched_Indicator(df=Pivot_Data, name_col='Octante LATAM Bonds Price Index', momentum_lookback=3, avg_lookback=3, n_points_chart=-252)
-
-SP_Outstretch.to_excel('Excel\SP_Outstretch.xlsx')
-Bonds_Px.to_excel('Excel\Bonds_Px_Outstretch.xlsx')
-Bonds_Z_Spread.to_excel('Excel\Bonds_Z_Spread_Outstretch.xlsx')
+SP_Outstretch = Outstretched_Indicator(df=Close_Price, name_col='SPY', momentum_lookback=3, avg_lookback=3, return_df=True)
+IBOV_Outstretch = Outstretched_Indicator(df=Close_Price, name_col='^BVSP', momentum_lookback=3, avg_lookback=3, return_df=True)
