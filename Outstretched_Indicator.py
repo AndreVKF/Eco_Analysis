@@ -1,5 +1,5 @@
-from API_BBG import API_BBG
-from SQL_Server_Connection import SQL_Server_Connection
+from Objects.API_BBG import API_BBG
+from Objects.SQL_Server_Connection import SQL_Server_Connection
 
 import pandas as pd
 import numpy as np
@@ -90,19 +90,6 @@ Bonds_Z_Spread = Outstretched_Indicator(df=Pivot_Data, name_col='Octante LATAM B
 
 Outstretched_Indicator(df=Pivot_Data, name_col='Octante LATAM Bonds Price Index', momentum_lookback=3, avg_lookback=3, n_points_chart=-252)
 
-Pivot_Data.head(15)
-
-len(Pivot_Data.loc[:'2010-01-14'].loc[(Pivot_Data['3D_Change'].notna()) & (Pivot_Data['3D_Change_Side']==1)]) 
-
-SP_Outstretch.to_excel('SP_Outstretch.xlsx')
-Bonds_Px.to_excel('Bonds_Px_Outstretch.xlsx')
-Bonds_Z_Spread.to_excel('Bonds_Z_Spread_Outstretch.xlsx')
-
-import numpy as np
-import matplotlib.pyplot as plt
-
-xs = np.linspace(-np.pi, np.pi, 30)
-ys = np.sin(xs)
-markers_on = [12, 17, 18, 19]
-plt.plot(xs, ys, '-gD', markevery=markers_on)
-plt.show()
+SP_Outstretch.to_excel('Excel\SP_Outstretch.xlsx')
+Bonds_Px.to_excel('Excel\Bonds_Px_Outstretch.xlsx')
+Bonds_Z_Spread.to_excel('Excel\Bonds_Z_Spread_Outstretch.xlsx')

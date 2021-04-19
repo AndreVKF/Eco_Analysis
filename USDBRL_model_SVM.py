@@ -146,7 +146,6 @@ Result_DF = pd.DataFrame(data=arrayResult, columns=['C', 'Gamma', 'Score_Treino'
 Result_DF.sort_values(by='Score_Teste', ascending=False).head(10)
 Result_DF.sort_values(by='Score_Tudo', ascending=False).head(10)
 
-
 ################ Loop only using C ################
 fig, axs = plt.subplots(int(len(geoSpace)/2), 2, figsize=(40, 30))
 
@@ -171,7 +170,7 @@ for index, i in enumerate(geoSpace, start=0):
     axs[index_i, index_j].set_title(f'SVM USDBRL Model C={i} Gamma=Default')
 
 
-fig.savefig("Tests_USDBRL_Fixed_C_Default_Gamma.png")
+fig.savefig("Images\Tests_USDBRL_Fixed_C_Default_Gamma.png")
 
 ######################## Model Testing ########################
 # Model with default values (C=1, gamma=default)
