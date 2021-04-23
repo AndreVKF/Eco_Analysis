@@ -3,17 +3,49 @@ import numpy as np
 
 import yfinance as yf
 
+import plotly.graph_objects as go
+
 from datetime import date
 
 class yFinance_Wrapper:
     def __init__(self, Refdate=date.today()):
         self.Refdate = Refdate
 
+        # Variables
+        self.Ibov_Stocks_Description_Columns = [
+            "Yahoo_Ticker"
+            ,"Name"
+            ,"GICS_Sector"
+            ,"GICS_Industry"
+        ]
+
         # Stocks Table
         # Make Request and Adjust Response DataFrame
         self.Ibov_Stocks = pd.read_csv("Csv/Acoes_IBOV.csv", sep=";")
         self.Ibov_Stocks['Yahoo_Ticker'] = self.Ibov_Stocks['Ticker'].apply(lambda x: str(x).split(sep=" ")[0]+".SA").to_list()
         self.Price_Data = yf.download(self.Ibov_Stocks['Yahoo_Ticker'].to_list(), period="max")
+
+        # IBOV data 
+        self.Ibov_Data = yf.download('^BVSP', period='max')
+
+
+    def update(self):
+        """Update Prices
+        """        
+        # Update Prices
+        self.Price_Data = yf.download(self.Ibov_Stocks['Yahoo_Ticker'].to_list(), period="max")
+        self.Ibov_Data = yf.download('^BVSP', period='max')
+
+    def ibovStocksDes(self):
+        """Show Stocks Description Info
+        """
+        pd.set_option('display.max_rows', None)
+        pd.set_option('display.max_columns', None)
+        print(self.Ibov_Stocks[self.Ibov_Stocks_Description_Columns].sort_values("Yahoo_Ticker"))   
+
+        pd.reset_option('display.max_rows')
+        pd.reset_option('display.max_columns')
+
 
     def getIbovEquitiesLastUpdate(self):
         """Generate updated DataFrame with price change
@@ -63,20 +95,59 @@ class yFinance_Wrapper:
 
         return Res_DF
 
-    ####################### Format Options #######################
-    def color_negative_red(value):
-        """
-        Colors elements in a dateframe
-        green if positive and red if
-        negative. Does not color NaN
-        values.
-        """
+    def priceHistoryChart(self, ticker=False, period=8):
+        """Function to generate ohlc history price chart
 
-        if value < 0:
-            color = '#FF6666'
-        elif value > 0:
-            color = 'lightgreen'
-        else:
-            color = 'white'
+        Args:
+            ticker (str): Name of the ticker. Defaults to False.
+            period (int): Number of years to get history. Defaults to 8.
+        """
+        # Check arguments
+        if not ticker:
+            return
 
-        return 'color: %s' % color
+        # Data Frame with Price Data
+        Plot_DF = pd.DataFrame({"Open": self.Price_Data["Open"][ticker]
+            ,"Close": self.Price_Data["Close"][ticker]
+            ,"High": self.Price_Data["High"][ticker]
+            ,"Low": self.Price_Data["Low"][ticker]
+            ,"Volume": self.Price_Data["Volume"][ticker]
+        }, self.Price_Data.index).dropna()
+
+        Plot_DF = Plot_DF.iloc[-252*period:]
+
+        # Plotly object
+        fig = go.Figure(data=go.Ohlc(
+            x=Plot_DF.index
+            ,open=Plot_DF['Open']
+            ,high=Plot_DF['High']
+            ,low=Plot_DF['Low']
+            ,close=Plot_DF['Close']
+        ))
+        fig.update_layout(
+            title=f"Price History OHLC"
+            ,yaxis_title=f"{ticker}"
+        )
+        fig.update(layout_xaxis_rangeslider_visible=False)
+        fig.show()
+        
+
+    
+
+####################### Format Options #######################
+def color_negative_red(value):
+    """
+    Colors elements in a dateframe
+    green if positive and red if
+    negative. Does not color NaN
+    values.
+    """
+
+    if value < 0:
+        color = '#FF6666'
+    elif value > 0:
+        color = 'lightgreen'
+    else:
+        color = 'white'
+
+    return 'color: %s' % color
