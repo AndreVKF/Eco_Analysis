@@ -47,7 +47,7 @@ class yFinance_Wrapper:
         pd.reset_option('display.max_columns')
 
 
-    def getIbovEquitiesLastUpdate(self):
+    def getIbovEquitiesLastUpdate(self, GICS_Segment="Industry"):
         """Generate updated DataFrame with price change
             for stocks in the IBOV index.
 
@@ -79,8 +79,8 @@ class yFinance_Wrapper:
         Price_DF['12M_Change'] = Price_DF['Px_Last']/Price_DF["12M_Open"] - 1
 
         # Adjust with GICS Sector
-        Price_DF = Price_DF.merge(self.Ibov_Stocks[['Yahoo_Ticker', 'GICS_Sector']], how='left', left_index=True, right_on=['Yahoo_Ticker'])
-        Price_DF.set_index(['GICS_Sector', 'Yahoo_Ticker'], inplace=True)
+        Price_DF = Price_DF.merge(self.Ibov_Stocks[['Yahoo_Ticker', f'GICS_{GICS_Segment}']], how='left', left_index=True, right_on=['Yahoo_Ticker'])
+        Price_DF.set_index([f'GICS_{GICS_Segment}', 'Yahoo_Ticker'], inplace=True)
 
         Price_DF = Price_DF.groupby(level=[0, 1]).sum()
 
