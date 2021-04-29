@@ -1,0 +1,84 @@
+Ticker;Name;Ticker_Min;ISIN;GICS_Sector;GICS_Industry
+ABEV3 BS Equity;Ambev SA;ABEV3   BZ;BRABEVACNOR1;Consumer Staples;Beverages
+CRFB3 BS Equity;Atacadao SA;CRFB3   BZ;BRCRFBACNOR2;Consumer Staples;Food & Staples Retailing
+AZUL4 BS Equity;Azul SA;AZUL4   BZ;BRAZULACNPR4;Industrials;Airlines
+BTOW3 BS Equity;B2W Cia Digital;BTOW3   BZ;BRBTOWACNOR8;Consumer Discretionary;Internet & Direct Marketing Retail
+B3SA3 BS Equity;B3 SA - Brasil Bolsa Balcao;B3SA3   BZ;BRB3SAACNOR6;Financials;Capital Markets
+BBDC4 BS Equity;Banco Bradesco SA;BBDC4   BZ;BRBBDCACNPR8;Financials;Banks
+BBDC3 BS Equity;Banco Bradesco SA;BBDC3   BZ;BRBBDCACNOR1;Financials;Banks
+BPAC11 BS Equity;Banco BTG Pactual SA;BPAC11  BZ;BRBPACUNT006;Financials;Capital Markets
+BBAS3 BS Equity;Banco do Brasil SA;BBAS3   BZ;BRBBASACNOR3;Financials;Banks
+SANB11 BS Equity;Banco Santander Brasil SA;SANB11  BZ;BRSANBCDAM13;Financials;Banks
+BBSE3 BS Equity;BB Seguridade Participacoes SA;BBSE3   BZ;BRBBSEACNOR5;Financials;Insurance
+BRML3 BS Equity;BR Malls Participacoes SA;BRML3   BZ;BRBRMLACNOR9;Real Estate;Real Estate Management & Development
+BRAP4 BS Equity;Bradespar SA;BRAP4   BZ;BRBRAPACNPR2;Materials;Metals & Mining
+BRKM5 BS Equity;Braskem SA;BRKM5   BZ;BRBRKMACNPA4;Materials;Chemicals
+BRFS3 BS Equity;BRF SA;BRFS3   BZ;BRBRFSACNOR8;Consumer Staples;Food Products
+CCRO3 BS Equity;CCR SA;CCRO3   BZ;BRCCROACNOR2;Industrials;Transportation Infrastructure
+ELET3 BS Equity;Centrais Eletricas Brasileiras SA;ELET3   BZ;BRELETACNOR6;Utilities;Electric Utilities
+ELET6 BS Equity;Centrais Eletricas Brasileiras SA;ELET6   BZ;BRELETACNPB7;Utilities;Electric Utilities
+PCAR3 BS Equity;Cia Brasileira de Distribuicao;PCAR3   BZ;BRPCARACNOR3;Consumer Staples;Food & Staples Retailing
+LCAM3 BS Equity;Cia de Locacao das Americas;LCAM3   BZ;BRLCAMACNOR3;Industrials;Road & Rail
+SBSP3 BS Equity;Cia de Saneamento Basico do Estado de Sa;SBSP3   BZ;BRSBSPACNOR5;Utilities;Water Utilities
+CMIG4 BS Equity;Cia Energetica de Minas Gerais;CMIG4   BZ;BRCMIGACNPR3;Utilities;Electric Utilities
+HGTX3 BS Equity;Cia Hering;HGTX3   BZ;BRHGTXACNOR9;Consumer Discretionary;Textiles, Apparel & Luxury Goods
+CPLE6 BS Equity;Cia Paranaense de Energia;CPLE6   BZ;BRCPLEACNPB9;Utilities;Electric Utilities
+CSNA3 BS Equity;Cia Siderurgica Nacional SA;CSNA3   BZ;BRCSNAACNOR6;Materials;Metals & Mining
+CIEL3 BS Equity;Cielo SA;CIEL3   BZ;BRCIELACNOR3;Information Technology;IT Services
+COGN3 BS Equity;Cogna Educacao;COGN3   BZ;BRCOGNACNOR2;Consumer Discretionary;Diversified Consumer Services
+CSAN3 BS Equity;Cosan SA;CSAN3   BZ;BRCSANACNOR6;Energy;Oil, Gas & Consumable Fuels
+CPFE3 BS Equity;CPFL Energia SA;CPFE3   BZ;BRCPFEACNOR0;Utilities;Electric Utilities
+CVCB3 BS Equity;CVC Brasil Operadora e Agencia de Viagen;CVCB3   BZ;BRCVCBACNOR1;Consumer Discretionary;Hotels, Restaurants & Leisure
+CYRE3 BS Equity;Cyrela Brazil Realty SA Empreendimentos;CYRE3   BZ;BRCYREACNOR7;Consumer Discretionary;Household Durables
+ECOR3 BS Equity;EcoRodovias Infraestrutura e Logistica S;ECOR3   BZ;BRECORACNOR8;Industrials;Transportation Infrastructure
+ENBR3 BS Equity;EDP - Energias do Brasil SA;ENBR3   BZ;BRENBRACNOR2;Utilities;Electric Utilities
+EMBR3 BS Equity;Embraer SA;EMBR3   BZ;BREMBRACNOR4;Industrials;Aerospace & Defense
+ENGI11 BS Equity;Energisa SA;ENGI11  BZ;BRENGICDAM16;Utilities;Electric Utilities
+ENEV3 BS Equity;Eneva SA;ENEV3   BZ;BRENEVACNOR8;Utilities;Independent Power and Renewable Electricity Producers
+EGIE3 BS Equity;Engie Brasil Energia SA;EGIE3   BZ;BREGIEACNOR9;Utilities;Independent Power and Renewable Electricity Producers
+EQTL3 BS Equity;Equatorial Energia SA;EQTL3   BZ;BREQTLACNOR0;Utilities;Electric Utilities
+EZTC3 BS Equity;Ez Tec Empreendimentos e Participacoes S;EZTC3   BZ;BREZTCACNOR0;Consumer Discretionary;Household Durables
+FLRY3 BS Equity;Fleury SA;FLRY3   BZ;BRFLRYACNOR5;Health Care;Health Care Providers & Services
+GGBR4 BS Equity;Gerdau SA;GGBR4   BZ;BRGGBRACNPR8;Materials;Metals & Mining
+GOLL4 BS Equity;Gol Linhas Aereas Inteligentes SA;GOLL4   BZ;BRGOLLACNPR4;Industrials;Airlines
+HAPV3 BS Equity;Hapvida Participacoes e Investimentos SA;HAPV3   BZ;BRHAPVACNOR4;Health Care;Health Care Providers & Services
+HYPE3 BS Equity;Hypera SA;HYPE3   BZ;BRHYPEACNOR0;Health Care;Pharmaceuticals
+IGTA3 BS Equity;Iguatemi Empresa de Shopping Centers SA;IGTA3   BZ;BRIGTAACNOR5;Real Estate;Real Estate Management & Development
+IRBR3 BS Equity;IRB Brasil Resseguros S/A;IRBR3   BZ;BRIRBRACNOR4;Financials;Insurance
+ITUB4 BS Equity;Itau Unibanco Holding SA;ITUB4   BZ;BRITUBACNPR1;Financials;Banks
+ITSA4 BS Equity;Itausa SA;ITSA4   BZ;BRITSAACNPR7;Financials;Banks
+JBSS3 BS Equity;JBS SA;JBSS3   BZ;BRJBSSACNOR8;Consumer Staples;Food Products
+JHSF3 BS Equity;JHSF Participacoes SA;JHSF3   BZ;BRJHSFACNOR2;Real Estate;Real Estate Management & Development
+KLBN11 BS Equity;Klabin SA;KLBN11  BZ;BRKLBNCDAM18;Materials;Containers & Packaging
+RENT3 BS Equity;Localiza Rent a Car SA;RENT3   BZ;BRRENTACNOR4;Industrials;Road & Rail
+LAME4 BS Equity;Lojas Americanas SA;LAME4   BZ;BRLAMEACNPR6;Consumer Discretionary;Multiline Retail
+LREN3 BS Equity;Lojas Renner SA;LREN3   BZ;BRLRENACNOR1;Consumer Discretionary;Multiline Retail
+MGLU3 BS Equity;Magazine Luiza SA;MGLU3   BZ;BRMGLUACNOR2;Consumer Discretionary;Multiline Retail
+MRFG3 BS Equity;Marfrig Global Foods SA;MRFG3   BZ;BRMRFGACNOR0;Consumer Staples;Food Products
+GOAU4 BS Equity;Metalurgica Gerdau SA;GOAU4   BZ;BRGOAUACNPR8;Materials;Metals & Mining
+BEEF3 BS Equity;Minerva SA/Brazil;BEEF3   BZ;BRBEEFACNOR6;Consumer Staples;Food Products
+MRVE3 BS Equity;MRV Engenharia e Participacoes SA;MRVE3   BZ;BRMRVEACNOR2;Consumer Discretionary;Household Durables
+MULT3 BS Equity;Multiplan Empreendimentos Imobiliarios S;MULT3   BZ;BRMULTACNOR5;Real Estate;Real Estate Management & Development
+NTCO3 BS Equity;Natura & Co Holding SA;NTCO3   BZ;BRNTCOACNOR5;Consumer Staples;Personal Products
+GNDI3 BS Equity;Notre Dame Intermedica Participacoes SA;GNDI3   BZ;BRGNDIACNOR2;Health Care;Health Care Providers & Services
+PRIO3 BS Equity;Petro Rio SA;PRIO3   BZ;BRPRIOACNOR1;Energy;Oil, Gas & Consumable Fuels
+BRDT3 BS Equity;Petrobras Distribuidora SA;BRDT3   BZ;BRBRDTACNOR1;Consumer Discretionary;Specialty Retail
+PETR4 BS Equity;Petroleo Brasileiro SA;PETR4   BZ;BRPETRACNPR6;Energy;Oil, Gas & Consumable Fuels
+PETR3 BS Equity;Petroleo Brasileiro SA;PETR3   BZ;BRPETRACNOR9;Energy;Oil, Gas & Consumable Fuels
+QUAL3 BS Equity;Qualicorp Consultoria e Corretora de Seg;QUAL3   BZ;BRQUALACNOR6;Health Care;Health Care Providers & Services
+RADL3 BS Equity;Raia Drogasil SA;RADL3   BZ;BRRADLACNOR0;Consumer Staples;Food & Staples Retailing
+RAIL3 BS Equity;Rumo SA;RAIL3   BZ;BRRAILACNOR9;Industrials;Road & Rail
+ASAI3 BS Equity;Sendas Distribuidora SA;ASAI3   BZ;BRASAIACNOR0;Consumer Staples;Food & Staples Retailing
+SULA11 BS Equity;Sul America SA;SULA11  BZ;BRSULACDAM12;Financials;Insurance
+SUZB3 BS Equity;Suzano SA;SUZB3   BZ;BRSUZBACNOR0;Materials;Paper & Forest Products
+VIVT3 BS Equity;Telefonica Brasil SA;VIVT3   BZ;BRVIVTACNOR0;Communication Services;Diversified Telecommunication Services
+TIMS3 BS Equity;TIM SA/Brazil;TIMS3   BZ;BRTIMSACNOR5;Communication Services;Wireless Telecommunication Services
+TOTS3 BS Equity;TOTVS SA;TOTS3   BZ;BRTOTSACNOR8;Information Technology;Software
+TAEE11 BS Equity;Transmissora Alianca de Energia Eletrica;TAEE11  BZ;BRTAEECDAM10;Utilities;Electric Utilities
+UGPA3 BS Equity;Ultrapar Participacoes SA;UGPA3   BZ;BRUGPAACNOR8;Energy;Oil, Gas & Consumable Fuels
+USIM5 BS Equity;Usinas Siderurgicas de Minas Gerais SA U;USIM5   BZ;BRUSIMACNPA6;Materials;Metals & Mining
+VALE3 BS Equity;Vale SA;VALE3   BZ;BRVALEACNOR0;Materials;Metals & Mining
+VVAR3 BS Equity;Via Varejo S/A;VVAR3   BZ;BRVVARACNOR1;Consumer Discretionary;Specialty Retail
+WEGE3 BS Equity;WEG SA;WEGE3   BZ;BRWEGEACNOR0;Industrials;Electrical Equipment
+YDUQ3 BS Equity;YDUQS Participacoes SA;YDUQ3   BZ;BRYDUQACNOR3;Consumer Discretionary;Diversified Consumer Services
+PSSA3 BS Equity;Porto Seguro AS;PSSA3 BZ;BRPSSAACNOR7;Financials;Insurance
