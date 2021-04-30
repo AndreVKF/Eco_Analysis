@@ -41,7 +41,7 @@ class yFinance_Wrapper:
         """
         pd.set_option('display.max_rows', None)
         pd.set_option('display.max_columns', None)
-        print(self.Ibov_Stocks[self.Ibov_Stocks_Description_Columns].sort_values("Yahoo_Ticker"))   
+        return self.Ibov_Stocks[self.Ibov_Stocks_Description_Columns].sort_values("Yahoo_Ticker")
 
         pd.reset_option('display.max_rows')
         pd.reset_option('display.max_columns')
@@ -93,9 +93,18 @@ class yFinance_Wrapper:
             "YTD_Change",
             "12M_Change"]]
 
-        return Res_DF
+        # DataFrame Style
+        pd.set_option('display.max_rows', len(Res_DF))
+        format_dict = {"Px_Last": "{:.2f}"
+            ,"1D_Delta": "{:+.2f}"
+            ,"DTD_Change": "{:.2%}"
+            ,"MTD_Change": "{:.2%}"
+            ,"YTD_Change": "{:.2%}"
+            ,"12M_Change": "{:.2%}"}
+        
+        return Res_DF.style.format(format_dict).bar(subset=['DTD_Change', 'MTD_Change', 'YTD_Change', '12M_Change'], align='mid', color=['darkred', 'darkgreen']).applymap(color_negative_red, subset=['1D_Delta'])
 
-    def priceHistoryChart(self, ticker=False, period=8):
+    def priceHistoryOLHCChart(self, ticker=False, period=8):
         """Function to generate ohlc history price chart
 
         Args:
@@ -106,13 +115,23 @@ class yFinance_Wrapper:
         if not ticker:
             return
 
-        # Data Frame with Price Data
-        Plot_DF = pd.DataFrame({"Open": self.Price_Data["Open"][ticker]
-            ,"Close": self.Price_Data["Close"][ticker]
-            ,"High": self.Price_Data["High"][ticker]
-            ,"Low": self.Price_Data["Low"][ticker]
-            ,"Volume": self.Price_Data["Volume"][ticker]
-        }, self.Price_Data.index).dropna()
+        elif ticker=='IBOV':
+            # Data Frame with Price Data
+            Plot_DF = pd.DataFrame({"Open": self.Ibov_Data["Open"]
+                ,"Close": self.Ibov_Data["Close"]
+                ,"High": self.Ibov_Data["High"]
+                ,"Low": self.Ibov_Data["Low"]
+                ,"Volume": self.Ibov_Data["Volume"]
+            }, self.Ibov_Data.index).dropna()
+
+        else:
+            # Data Frame with Price Data
+            Plot_DF = pd.DataFrame({"Open": self.Price_Data["Open"][ticker]
+                ,"Close": self.Price_Data["Close"][ticker]
+                ,"High": self.Price_Data["High"][ticker]
+                ,"Low": self.Price_Data["Low"][ticker]
+                ,"Volume": self.Price_Data["Volume"][ticker]
+            }, self.Price_Data.index).dropna()
 
         Plot_DF = Plot_DF.iloc[-252*period:]
 
@@ -130,7 +149,62 @@ class yFinance_Wrapper:
         )
         fig.update(layout_xaxis_rangeslider_visible=False)
         fig.show()
-        
+
+    def priceHistorySMAChart(self, ticker=False, period=8, sma_short=22, sma_long=88):
+        """Function to generate history price chart
+
+        Args:
+            ticker (str): Name of the ticker. Defaults to False.
+            period (int): Number of years to get history. Defaults to 8.
+            sma_short (int): Short simple moving avg. period
+            sma_long (int): Long simple moving avg. period
+        """
+
+         # Check arguments
+        if not ticker:
+            return
+        # Price DataFrame
+        elif ticker=='IBOV':
+            Price_Data =  pd.DataFrame(self.Ibov_Data['Close'].dropna())
+            Price_Data.rename(columns={'Close': 'IBOV'})
+        else:
+            Price_Data =  pd.DataFrame(self.Price_Data['Close'][ticker].dropna())
+
+        # Add moving avgs
+        Price_Data['SMA Short'] = Price_Data[ticker].rolling(sma_short).mean()
+        Price_Data['SMA Long'] = Price_Data[ticker].rolling(sma_long).mean()
+
+        # Remove na
+        Price_Data.dropna(inplace=True)
+        # Slice DataFrame
+        Price_Data = Price_Data.iloc[-252*period:]
+
+        # Create chart
+        fig = go.Figure()
+        fig.add_trace(go.Scatter(x=Price_Data.index
+            ,y=Price_Data[ticker]
+            ,mode="lines"
+            ,line=dict(color="#1f77b4")
+            ,name=ticker))
+
+        fig.add_trace(go.Scatter(x=Price_Data.index
+            ,y=Price_Data['SMA Short']
+            ,mode="lines"
+            ,line=dict(color="#2ca02c")
+            ,name="Short SMA"))
+
+        fig.add_trace(go.Scatter(x=Price_Data.index
+            ,y=Price_Data['SMA Long']
+            ,mode="lines"
+            ,line=dict(color="#d62728")
+            ,name="Long SMA"))
+
+        fig.update_layout(
+            title=f"Price History {ticker}"
+            ,yaxis_title=f"PX_Last"
+        )
+
+        fig.show()
 
     
 
