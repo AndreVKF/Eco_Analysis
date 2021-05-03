@@ -58,28 +58,47 @@ def SMA_Mov(dataFrame, colName, shortSMA=22, longSMA=66, printReturn=False):
 shortSMA = 22
 longSMA = 66
 
-SMA = SMA_Mov(dataFrame=Close_Price, colName='SPY')
-
+stock = '^BVSP'
+SMA = SMA_Mov(dataFrame=Close_Price, colName=stock)
 
 # Plotly Chart
 fig = make_subplots(specs=[[{"secondary_y": True}]])
 
-fig.add_trace(go.Scatter(x=SMA.index, y=SMA['SPY'], name="SPY", line=dict(color="#1f77b4")), secondary_y=False)
+fig.add_trace(go.Scatter(x=SMA.index, y=SMA[stock], name=stock, line=dict(color="#1f77b4")), secondary_y=False)
 fig.add_trace(go.Scatter(x=SMA.index, y=SMA[f'SMA_{shortSMA}'], name="Short SMA SPY", line=dict(color="#ff7f0e")), secondary_y=False)
 fig.add_trace(go.Scatter(x=SMA.index, y=SMA[f'SMA_{longSMA}'], name="Long SMA SPY", line=dict(color="#e377c2")), secondary_y=False)
 fig.add_trace(go.Scatter(x=SMA.index, y=SMA['Position'], name="Position", line=dict(color="#7f7f7f")), secondary_y=True)
 fig.show();
 
+# Calculate returns
+# Slice Dataframe
+IniDate="2010-01-01"
+Return_DF = SMA.loc[SMA.index>=IniDate].dropna()
+Return_DF['Daily_Return'] = np.log(Return_DF[stock]/Return_DF[stock].shift(1))
 
-# plot_DF = SMA.tail(252)
+fig = px.histogram(Return_DF, x='Daily_Return', nbins=35)
+fig.show()
 
-# fig, axs = plt.subplots(2, 1)
-# axs[0].plot(plot_DF.index, plot_DF[['SPY', 'SMA_22', 'SMA_66']])
-# axs[1].plot(plot_DF.index, plot_DF['Signal'])
-# fig.show();
+Return_DF['Daily_Return_Strategy'] = Return_DF['Position'] * Return_DF['Daily_Return']
 
-# figura = px.line(title = f'SMA')
-# figura.add_scatter(x=SMA.index, y=SMA['SPY'], name='USDBRL', mode='lines')
-# figura.add_scatter(x=SMA.index, y=SMA['SMA_22'], name='SMA_22', line_color='#ff7f0e', line_dash="dash")
-# figura.add_scatter(x=SMA.index, y=SMA['SMA_66'], name='SMA_66', line_color='#2ca02c', line_dash="dash")
-# figura.show();
+# Strat Return X Long only return
+# Profit
+Return_DF[['Daily_Return', 'Daily_Return_Strategy']].sum().apply(np.exp)
+# Annualized mid return
+np.exp(Return_DF[['Daily_Return', 'Daily_Return_Strategy']].mean() * 252) - 1
+# Volatility
+(Return_DF[['Daily_Return', 'Daily_Return_Strategy']].apply(np.exp) - 1).std() * 252 ** 0.5
+
+Plot_DF = Return_DF[['Daily_Return', 'Daily_Return_Strategy']].cumsum().apply(np.exp)
+
+fig = go.Figure()
+fig.add_trace(go.Scatter(x=Plot_DF.index, y=Plot_DF['Daily_Return'], mode='lines', name="Return"))
+fig.add_trace(go.Scatter(x=Plot_DF.index, y=Plot_DF['Daily_Return_Strategy'], mode='lines', name="Strat Return"))
+
+fig.update_layout(
+    title="Return X Strat Return"
+    ,xaxis_title="Refdate"
+    ,yaxis_title="(%)"
+)
+
+fig.show();
