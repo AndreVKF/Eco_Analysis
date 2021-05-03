@@ -70,7 +70,7 @@ fig.add_trace(go.Scatter(x=SMA.index, y=SMA[f'SMA_{longSMA}'], name="Long SMA SP
 fig.add_trace(go.Scatter(x=SMA.index, y=SMA['Position'], name="Position", line=dict(color="#7f7f7f")), secondary_y=True)
 fig.show();
 
-# Calculate returns
+############### Calculate returns ###############
 # Slice Dataframe
 IniDate="2010-01-01"
 Return_DF = SMA.loc[SMA.index>=IniDate].dropna()

@@ -35,8 +35,12 @@ stock = 'ABEV3.SA'
 SMA_Short = 22
 SMA_Long = 88
 
-Price_Data =  pd.DataFrame(yFinance_Wrapper.Price_Data['Close'][stock].dropna())
+Price_Data =  pd.DataFrame(yFinance_Wrapper.Ibov_Data['Close'].dropna())
 Price_Data['SMA Short'] = Price_Data[stock].rolling(SMA_Short).mean()
 Price_Data['SMA Long'] = Price_Data[stock].rolling(SMA_Long).mean()
+
+Price_Data.dropna(inplace=True)
+
+yFinance_Wrapper.priceHistorySMAChart(ticker="ABEV3.SA")
 
 # pd.reset_option('display.max_rows')
