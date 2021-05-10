@@ -206,6 +206,33 @@ class yFinance_Wrapper:
 
         fig.show()
 
+    def priceHistoryBoxPlot(self, tickers, years=3):
+        """Function to generate boxplot chart of tickers
+
+        Args:
+            tickers (list): [list of strings of tickers]
+            years (int, optional): [number of years of price history]. Defaults to 3.
+
+        Returns:
+            boxplot chart
+        """
+
+        # DataFrame Historic Prices
+        Price_DF = self.Price_Data['Close'].iloc[-252*years:]
+
+        # Current Price Data
+        Price_DF.iloc[-1:][tickers].columns
+
+        # Initiate figure object
+        fig = go.Figure()
+
+        # Loop through tickers to add to boxplot chart
+        for ticker in tickers:
+            fig.add_trace(go.Box(y=Price_DF[ticker].dropna().values, name=ticker, boxmean=True))
+
+        # Add last data point
+        fig.add_trace(go.Scatter(x=Price_DF.iloc[-1:][tickers].columns.to_list(), y=Price_DF.iloc[-1:][tickers].values.tolist()[0], mode="markers", marker_symbol="x-dot", marker_color="black", name="LAST PRICE"))
+        fig.show();
     
 
 ####################### Format Options #######################
