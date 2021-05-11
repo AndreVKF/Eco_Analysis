@@ -19,8 +19,11 @@ yFinance_Wrapper.getIbovEquitiesLastUpdate()
 
 yFinance_Wrapper.update()
 
-# Financials Equities
+# Boxplot
 Des_DF = yFinance_Wrapper.ibovStocksDes()
-Fin_Tickers = Des_DF.loc[Des_DF['GICS_Sector']=='Financials']['Yahoo_Ticker'].to_list()
+Fin_Tickers = Des_DF.loc[Des_DF['GICS_Sector']=='Materials']['Yahoo_Ticker'].to_list()
 
 yFinance_Wrapper.priceHistoryBoxPlot(tickers=Fin_Tickers)
+
+# Equities KPIs
+yFinance_Wrapper.equitiesKPIData()

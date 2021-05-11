@@ -78,7 +78,7 @@ class yFinance_Wrapper:
         Price_DF['YTD_Change'] = Price_DF['Px_Last']/Price_DF["YTD_Open"] - 1
         Price_DF['12M_Change'] = Price_DF['Px_Last']/Price_DF["12M_Open"] - 1
 
-        # Adjust with GICS Sector
+        # Adjust with GICS Segment
         Price_DF = Price_DF.merge(self.Ibov_Stocks[['Yahoo_Ticker', f'GICS_{GICS_Segment}']], how='left', left_index=True, right_on=['Yahoo_Ticker'])
         Price_DF.set_index([f'GICS_{GICS_Segment}', 'Yahoo_Ticker'], inplace=True)
 
@@ -103,6 +103,61 @@ class yFinance_Wrapper:
             ,"12M_Change": "{:.2%}"}
         
         return Res_DF.style.format(format_dict).bar(subset=['DTD_Change', 'MTD_Change', 'YTD_Change', '12M_Change'], align='mid', color=['darkred', 'darkgreen']).applymap(color_negative_red, subset=['1D_Delta'])
+
+    def equitiesKPIData(self, GICS_Segment="Industry"):
+        """Function to generate DataFrame with some KPIs Index for equities
+
+        Args:
+            GICS_Segment (str, optional): Segmentation by GICS_Segment. Defaults to "Industry".
+        """ 
+        # List of tickers 
+        Tickers_DF = self.ibovStocksDes()
+        Tickers_List = Tickers_DF['Yahoo_Ticker'].to_list()
+
+        # Name of fields
+        colNames = ["previousClose",
+            "trailingAnnualDividendYield",
+            "trailingAnnualDividendRate",
+            "payoutRatio",
+            "dividendRate",
+            "trailingPE",
+            "forwardPE",
+            "dividendYield",
+            "enterpriseToRevenue",
+            "enterpriseToEbitda",
+            "bookValue",
+            "trailingEps",
+            "forwardEps",
+            "priceToBook"]
+
+        Return_DF = pd.DataFrame(columns=colNames)
+
+        # Loop thourgh tickers
+        for Ticker in Tickers_List:
+            # Request data
+            RequestInfo = yf.Ticker(Ticker)
+            EquityInfo = RequestInfo.info
+
+            # Json to DataFrame
+            Equity_DF = pd.DataFrame.from_dict(EquityInfo, orient="index", columns=[Ticker])
+
+            # Concat Result DataFrame
+            Return_DF = pd.concat([Return_DF, Equity_DF.loc[Equity_DF.index.isin(colNames)].T])
+
+
+        # Adjust with GICS Segment
+        Return_DF = Return_DF.merge(self.Ibov_Stocks[['Yahoo_Ticker', f'GICS_{GICS_Segment}']], how='left', left_index=True, right_on=['Yahoo_Ticker'])
+        Return_DF.set_index([f'GICS_{GICS_Segment}', 'Yahoo_Ticker'], inplace=True)
+
+        Return_DF = Return_DF.groupby(level=[0, 1]).sum()
+
+        # Style DataFrame
+        Format_DF = Return_DF
+        Format_DF = Format_DF.style.background_gradient(cmap='coolwarm_r', subset=[x for x in colNames if x != "previousClose"])
+        Format_DF = Format_DF.set_properties(**{'font-size': '11pt'})
+
+        return Format_DF
+
 
     def priceHistoryOLHCChart(self, ticker=False, period=8):
         """Function to generate ohlc history price chart
