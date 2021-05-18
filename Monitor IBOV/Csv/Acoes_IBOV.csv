@@ -71,6 +71,7 @@ RAIL3 BS Equity;Rumo SA;RAIL3   BZ;BRRAILACNOR9;Industrials;Road & Rail
 ASAI3 BS Equity;Sendas Distribuidora SA;ASAI3   BZ;BRASAIACNOR0;Consumer Staples;Food & Staples Retailing
 SULA11 BS Equity;Sul America SA;SULA11  BZ;BRSULACDAM12;Financials;Insurance
 SUZB3 BS Equity;Suzano SA;SUZB3   BZ;BRSUZBACNOR0;Materials;Paper & Forest Products
+KLBN11 BS Equity;Klabin SA;KLBN11 BZ;BRKLBNCDAM18;Materials;Paper & Forest Products
 VIVT3 BS Equity;Telefonica Brasil SA;VIVT3   BZ;BRVIVTACNOR0;Communication Services;Diversified Telecommunication Services
 TIMS3 BS Equity;TIM SA/Brazil;TIMS3   BZ;BRTIMSACNOR5;Communication Services;Wireless Telecommunication Services
 TOTS3 BS Equity;TOTVS SA;TOTS3   BZ;BRTOTSACNOR8;Information Technology;Software
@@ -83,3 +84,5 @@ WEGE3 BS Equity;WEG SA;WEGE3   BZ;BRWEGEACNOR0;Industrials;Electrical Equipment
 YDUQ3 BS Equity;YDUQS Participacoes SA;YDUQ3   BZ;BRYDUQACNOR3;Consumer Discretionary;Diversified Consumer Services
 PSSA3 BS Equity;Porto Seguro AS;PSSA3 BZ;BRPSSAACNOR7;Financials;Insurance
 CMIN3 BS Equity;CSN Mineracao AS;CMIN3 BZ;BRCMINACNOR2;Materials;Metals & Mining
+AGRO3 BS Equity;BrasilAgro - Companhia Bras. De Prop.;AGRO3 BZ;BRAGROACNOR7;Consumer Staples;Food Products
+SLCE3 BS Equity;SLC Agricola AS;SLCE3 BZ;BRSLCEACNOR2;Consumer Staples;Food Products

@@ -116,6 +116,8 @@ class yFinance_Wrapper:
 
         # Name of fields
         colNames = ["previousClose",
+            "marketCap",           
+            "beta",
             "trailingAnnualDividendYield",
             "trailingAnnualDividendRate",
             "payoutRatio",
@@ -150,6 +152,9 @@ class yFinance_Wrapper:
         Return_DF.set_index([f'GICS_{GICS_Segment}', 'Yahoo_Ticker'], inplace=True)
 
         Return_DF = Return_DF.groupby(level=[0, 1]).sum()
+
+        # Adjust Market Cap to million
+        Return_DF['marketCap'] = Return_DF['marketCap']/1000000
 
         # Style DataFrame
         Format_DF = Return_DF
