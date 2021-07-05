@@ -46,8 +46,8 @@ r2.json()
 #    'data_inicio_divulgacao_cota': '2004-02-18',
 #    'data_atualizacao': '2018-04-19T18:40:00'},
 
-codigoFundo = 546353
-urlFundo = f"https://api-sandbox.anbima.com.br/feed/fundos/v1/fundos/{codigoFundo}/serie-historica?data-inicio=2021-06-28&data-fim=2021-06-28"
+codigoFundo = 126251
+urlFundo = f"https://api-sandbox.anbima.com.br/feed/fundos/v1/fundos/{codigoFundo}/serie-historica"
 
 r3 = requests.get(url=urlFundo, headers=headers2)
 r3.status_code

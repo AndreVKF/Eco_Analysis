@@ -9,7 +9,10 @@ from Backend.yFinance_Wrapper import *
 
 yFinance_Wrapper = yFinance_Wrapper()
 yFinance_Wrapper.update()
-Ibov_Price_Data = yFinance_Wrapper.getIbovEquitiesLastUpdate(GICS_Segment="Industry")
+yFinance_Wrapper.getIbovEquitiesLastUpdate(GICS_Segment="Industry")
+
+ibovEquitiesData = yFinance_Wrapper.getIbovEquitiesLastUpdate(GICS_Segment="Industry")
+ibovEquitiesData.data.to_csv("C:\\Users\\André Viniciu\\OneDrive\\Pasta\\Documentos\\IBOV Data\\LastData.csv")
 
 ticker = "BRFS3.SA"
 yFinance_Wrapper.priceHistoryOLHCChart(ticker=ticker)
